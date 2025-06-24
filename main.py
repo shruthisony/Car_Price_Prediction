@@ -1,3 +1,4 @@
+# Import required libraries
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import pickle
@@ -13,7 +14,7 @@ with open("scalar.pkl","rb") as file:
 # FastAPI instance
 app = FastAPI()
 
-# Request model
+# Request data
 class CarInput(BaseModel):
     year: int
     present_price: float
@@ -23,6 +24,7 @@ class CarInput(BaseModel):
     seller_type: str  # "Dealer" or "Individual"
     transmission: str  # "Manual" or "Automatic"
 
+# Defining the function to predict the output
 @app.post("/predict")
 def predict_price(car: CarInput):
     try:
